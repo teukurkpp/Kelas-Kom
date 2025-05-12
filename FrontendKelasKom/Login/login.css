@@ -1,0 +1,171 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+  }
+  
+.form-login{
+    display: flex; /*untuk mengatur tata letak agar fleksibel*/
+    height: 100vh; /*agar tingginya sesuai dengan layar*/
+    justify-content: center; /*agar form letaknya ditengah kiri kanan*/
+    align-items: center; /*agar isi kon ditengah dari atas ke bawah*/
+    background-size: cover;
+    background-image: url('1.png'); /* Ganti dengan nama file kamu */
+    background-position: center;
+}
+  
+.login-card {
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    text-align: center;
+    width: 300px;
+}
+
+.login-form {
+    width: 100%;
+}
+
+.login-form h2 {
+    margin-bottom: 5px;
+    font-size: 30px;
+}
+
+.login-form label {
+    display: block;
+    text-align: left;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.login-form p {
+    display: block;
+    margin-top: 20px;
+}
+
+input[type="email"],  
+input[type="password"] {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 0px;
+}
+
+.sandi {
+    display: block;
+    text-align: right;
+    font-size: 14px;
+    color: #5a38c0;
+}
+  
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 1px;
+    background-color: #5a38c0;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-lanjut {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 1px;
+    background-color: #5a38c0;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+  
+.google-btn {
+    background-color: white;
+    width: 100%;
+    color: black;
+    border: 1px solid black;
+    border-radius: 6px;
+    cursor: pointer;
+}
+  
+.option {
+    font-size: 14px;
+}
+  
+.link {
+    display: block;
+    margin-top: 15px;
+    font-size: 13px;
+    color: #5a38c0;
+    text-decoration: none;
+}
+
+.kelas-section {
+    padding: 20px 30px;
+    width: 100%;
+    max-width: none;
+    margin: 20px;
+  }
+  
+  
+  .lantai {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 40px 0 10px;
+  }
+  
+  .kelas-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+  }
+  
+  .kelas.bulat {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 34px;
+    padding: 8px;
+    font-weight: bold;
+    line-height: 1.1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .kelas.bulat span {
+    font-weight: normal;
+    font-size: 16px;
+    margin-top: 8px;
+  }
+  
+  /* Warna status */
+  .kosong {
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+  }
+  
+  .penuh {
+    background-color: #c62828;
+    color: white;
+  }
+  
+  .terisi {
+    background-color: #fbc02d;
+    color: black;
+  }
+  
