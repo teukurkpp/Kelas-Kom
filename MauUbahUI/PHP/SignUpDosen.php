@@ -6,17 +6,17 @@ $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
-    $npm = $_POST['npm'];
+    $nip = $_POST['nip'];
     $prodi = $_POST['prodi'];
     $password = $_POST['password'];
 
     // Cek NPM apakah sudah ada
-    $cek = mysqli_query($conn, "SELECT * FROM mahasiswa WHERE npm = '$npm'");
+    $cek = mysqli_query($conn, "SELECT * FROM dosen WHERE nip = '$nip'");
     if (mysqli_num_rows($cek) > 0) {
-        $error = 'NPM sudah terdaftar!';
+        $error = 'NIP sudah terdaftar!';
     } else {
-        $query = "INSERT INTO mahasiswa (username, npm, prodi, password) 
-                  VALUES ('$username', '$npm', '$prodi', '$password')";
+        $query = "INSERT INTO dosen (username, nip, prodi, password) 
+                  VALUES ('$username', '$nip', '$prodi', '$password')";
 
         
         if (mysqli_query($conn, $query)) {
@@ -53,8 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label>Username</label>
         <input type="text" name="username" placeholder="Masukkan Nama Lengkap Anda" required>
 
-        <label>NPM</label>
-        <input type="text" name="npm" placeholder="Masukkan NPM" required>
+        <label>NIP</label>
+        <input type="text" name="nip" placeholder="Masukkan NIP" required>
 
         <label>Program Studi</label>
         <input type="text" name="prodi" placeholder="Masukkan Prodi Anda" required>
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="password" name="password" placeholder="Buat Kata Sandi" required>
 
         <button type="submit" class="btn-lanjut">Daftar</button>
-        <a href="SignUpDosen.php" class="link">Daftar sebagai Dosen</a>
+        <a href="SignUp.php" class="link">Daftar sebagai Mahasiwa</a>
         <a href="LoginUser.php" class="link">Kembali ke Login</a>
 
 
