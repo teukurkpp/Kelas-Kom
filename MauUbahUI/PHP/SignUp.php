@@ -13,7 +13,7 @@
         <h2>Daftar</h2>
 
         <label>Username</label>
-        <input type="text" placeholder="Masukkan Username" required>
+        <input type="text" placeholder="Masukkan Nama Lengkap Anda" required>
 
         <label>NPM</label>
         <input type="text" placeholder="Masukkan NPM" required>
