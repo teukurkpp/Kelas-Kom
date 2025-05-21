@@ -20,7 +20,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     text-align: center;
-    width: 300px;
+    width: 340px;
 }
 
 .login-form {
@@ -43,8 +43,8 @@ body {
     display: block;
     margin-top: 20px;
 }
-
-input[type="email"],  
+input[type="text"],
+input[type="username"],  
 input[type="password"] {
     box-sizing: border-box;
     width: 100%;
@@ -52,7 +52,7 @@ input[type="password"] {
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 6px;
-    margin-bottom: 0px;
+    margin-bottom: 15px;
 }
 
 .sandi {
@@ -77,7 +77,7 @@ button {
     display: block;
     width: 100%;
     padding: 10px;
-    margin-top: 1px;
+    margin-top: 20px;
     background-color: #5a38c0;
     color: white;
     text-align: center;
@@ -103,7 +103,7 @@ button {
 .link {
     display: block;
     margin-top: 15px;
-    font-size: 13px;
+    font-size: 14px;
     color: #5a38c0;
     text-decoration: none;
 }
