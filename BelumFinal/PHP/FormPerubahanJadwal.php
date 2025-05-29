@@ -1,0 +1,187 @@
+<?php
+session_start();
+include 'DbKelasKom.php';
+
+// Cek login
+if (!isset($_SESSION['username']) && !isset($_SESSION['npm'])) {
+    header("Location: LoginUser.php");
+    exit;
+}
+
+$userType = '';
+$userIdentifier = '';
+
+// Determine user type
+if (isset($_SESSION['username'])) {
+    $username = mysqli_real_escape_string($conn, $_SESSION['username']);
+    $query_admin = mysqli_query($conn, "SELECT username FROM admin WHERE username = '$username'");
+    if (mysqli_num_rows($query_admin) > 0) {
+        $userType = 'Admin';
+        $userIdentifier = $username;
+    } else {
+        $query_dosmhs = mysqli_query($conn, "SELECT username, prodi FROM dosmhs WHERE username = '$username'");
+        if ($data = mysqli_fetch_assoc($query_dosmhs)) {
+            $prodi = $data['prodi'];
+            $query_dosen = mysqli_query($conn, "SELECT dosen FROM jadwal_matkul WHERE dosen = '$username'");
+            if (mysqli_num_rows($query_dosen) > 0) {
+                $userType = 'Dosen';
+                $userIdentifier = $username;
+            } else {
+                $userType = ($prodi === 'Sistem Informasi' ? 'Sistem Informasi' : 'Informatika');
+                $userIdentifier = $data['username'];
+            }
+        }
+    }
+} elseif (isset($_SESSION['npm'])) {
+    $npm = mysqli_real_escape_string($conn, $_SESSION['npm']);
+    $query_pj = mysqli_query($conn, "SELECT npm FROM pj_kelas WHERE npm = '$npm'");
+    if ($data = mysqli_fetch_assoc($query_pj)) {
+        $userType = 'PJ Kelas';
+        $userIdentifier = $data['npm'];
+    }
+}
+
+// Restrict access for Mahasiswa and Dosen
+if ($userType === 'Sistem Informasi' || $userType === 'Informatika' || $userType === 'Dosen') {
+    header("Location: PilihHari.php");
+    exit;
+}
+
+// Proceed with the rest of the FormPerubahanJadwal.php logic for Admin and PJ Kelas
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KelasKom - Formulir Perubahan Ruang Kelas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/FormPerubahanJadwal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+    <div class="logo-section">
+      <img src="../PIC/logo.png" alt="Logo Fasilkom" />
+      <div class="logo-text">
+        <span>KelasKom</span>
+        <span>Fakultas Ilmu Komputer</span>
+      </div>
+    </div>
+    <div class="user-dropdown">
+      <input type="checkbox" id="toggle-dropdown">
+      <div class="user-label">
+        <div class="user-label-content">
+          <div class="user-info">
+            <strong><?php echo htmlspecialchars($userIdentifier); ?></strong><br />
+            <?php echo htmlspecialchars($userType); ?>
+          </div>
+          <label for="toggle-dropdown" class="arrow">▾</label>
+        </div>
+      </div>
+      <div class="dropdown-content">
+        <div class="dropdown-header">Selamat Datang!</div>
+        <a href="TampilanJadwalKelas.php">📋 Jadwal</a>
+        <a href="LoginUser.php">↩️ Keluar</a>
+      </div>
+    </div>
+  </header>
+
+        <main class="main-content py-5 px-3 px-md-5">
+            <a href="PilihHari.php" class="back-button" id="backButton">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+
+            <div class="form-container bg-white rounded shadow p-4 mx-auto" style="max-width: 800px;">
+                <h1 class="form-title text-center mb-4">Formulir Perubahan Ruang Kelas</h1>
+
+                <form id="kelasForm">
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label for="hari" class="form-label">Hari</label>
+                            <select id="hari" class="form-select" required>
+                                <option value="" disabled selected>Pilih Hari</option>
+                                <option value="Senin">Senin</option>
+                                <option value="Selasa">Selasa</option>
+                                <option value="Rabu">Rabu</option>
+                                <option value="Kamis">Kamis</option>
+                                <option value="Jumat">Jumat</option>
+                                <option value="Jumat">Sabtu</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="tanggal" class="form-label">Tanggal</label>
+                            <input type="date" id="tanggal" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label for="jam" class="form-label">Jam</label>
+                            <input type="text" id="jam" class="form-control" placeholder="07.30 - 10.00" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="lantai" class="form-label">Lantai</label>
+                            <select id="lantai" class="form-select" required>
+                                <option value="" disabled selected>Pilih Lantai</option>
+                                <option value="4">Lantai 4</option>
+                                <option value="3">Lantai 3</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="ruangan" class="form-label">Ruangan</label>
+                        <select id="ruangan" class="form-select" required>
+                            <option value="" disabled selected>Pilih Ruangan</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="kelas" class="form-label">Kelas</label>
+                        <input type="text" id="kelas" class="form-control" value="4A - Sistem Informasi" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Jumlah SKS</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sks" value="2" id="sks2">
+                            <label class="form-check-label" for="sks2">2 SKS</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sks" value="3" id="sks3" checked>
+                            <label class="form-check-label" for="sks3">3 SKS</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="mataKuliah" class="form-label">Mata Kuliah</label>
+                        <input type="text" id="mataKuliah" class="form-control" placeholder="Contoh: Data Warehouse" required>
+                    </div>
+
+                    <div class="d-flex gap-2 mt-4">
+                        <button type="button" id="btnSementara" class="btn btn-success w-50" disabled>Ubah Sementara</button>
+                        <button type="button" id="btnPermanen" class="btn btn-danger w-50" disabled>Ubah Permanen</button>
+                    </div>
+                    <div class="alert mt-3 d-none" id="formFeedback" role="alert"></div>
+                </form>
+            </div>
+        </main>
+
+    <script>
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      const dropdown = document.querySelector('.user-dropdown');
+      const toggle = document.querySelector('#toggle-dropdown');
+      if (!dropdown.contains(event.target)) {
+        toggle.checked = false;
+      }
+    });
+  </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../JS/FormPerubahanJadwal.js"></script>
+</body>
+</html>

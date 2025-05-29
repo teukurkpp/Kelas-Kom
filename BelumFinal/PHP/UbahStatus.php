@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KelasKom - Ubah Status</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="../CSS/UbahStatus.css">
+</head>
+<body>
+    <header>
+    <div class="logo-section">
+      <img src="../PIC/logo.png" alt="Logo Fasilkom" />
+      <div class="logo-text">
+        <span>KelasKom</span>
+        <span>Fakultas Ilmu Komputer</span>
+      </div>
+    </div>
+  </div>
+  <div class="user-dropdown">
+    <input type="checkbox" id="toggle-dropdown">
+    <label for="toggle-dropdown" class="user-label">
+      <div class="user-label-content">
+        <div class="user-info">
+          <strong>FIRYAL KHOIRUNNISA ZULFA</strong><br />
+          Mahasiswa (SI)
+        </div>
+        <span class="arrow">&#9662;</span>
+      </div>
+    </label>
+    
+    <div class="dropdown-content">
+      <div class="dropdown-header">Selamat Datang!</div>
+      <a href="../PHP/TampilanJadwalKelas.php">📅 Jadwal</a>
+      <a href="../PHP/LoginUser.php">↩️ Keluar</a>
+    </div>
+  </div>  
+  </header>
+
+  <main class="main-container">
+    <div class="card">
+      <div class="card-header">Perubahan Status Kelas</div>
+      <div class="card-body">
+        <div id="offlineAlert" class="alert alert-danger" style="display: none;">
+          Kelas ini sudah berstatus Offline
+        </div>
+
+        <div class="step-container active" id="step1">
+          <div style="font-size: 14px; margin-bottom: 15px;">
+            Ubah kelas 4.80 - 6 menjadi...
+          </div>
+          <div class="row g-3">
+            <div class="col-6">
+              <button class="btn btn-online option-btn w-100" onclick="goToStep(3)">Online</button>
+            </div>
+            <div class="col-6">
+              <button class="btn btn-offline option-btn w-100" onclick="showOfflineMessage()">Offline</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-container" id="step2">
+          <div style="font-size: 14px; margin-bottom: 15px;">
+            Apakah Anda yakin ingin merubah<br>
+            Kelas 4.80 - 6 menjadi <span style="font-weight: 600;">Online</span>
+          </div>
+          <div style="font-size: 14px; margin-bottom: 25px;">
+            pukul <span id="startTime">07.30</span> - <span id="endTime">09.00</span> selama <span id="duration">90 Menit</span>
+          </div>
+          <div class="d-flex justify-content-between">
+            <button class="btn-kembali" onclick="goToStep(1)">Kembali</button>
+            <button class="btn-konfirmasi" onclick="showSuccessMessage()">Konfirmasi</button>
+          </div>
+        </div>
+
+        <div class="step-container" id="step3">
+          <div style="font-size: 14px; margin-bottom: 20px;">
+            Setting waktu Kelas Online...
+          </div>
+          <div class="time-input-container">
+            <div class="flex-grow-1">
+              <span class="time-label">Waktu mulai</span>
+              <input type="time" class="form-control" id="timeStart" value="07:30">
+            </div>
+            <div class="flex-grow-1">
+              <span class="time-label">Waktu selesai</span>
+              <input type="time" class="form-control" id="timeEnd" value="09:00">
+            </div>
+          </div>
+          <div class="mb-4">
+            <span class="time-label">Timer</span>
+            <input type="text" class="form-control" id="timerInput" value="90 Menit">
+          </div>
+          <div class="d-flex justify-content-end">
+            <button class="btn-selesai" onclick="goToStep(2)">Selesai</button>
+          </div>
+        </div>
+
+        <div class="step-container" id="successMessage">
+          <div class="text-center py-4">
+            <i class="fas fa-check-circle" style="font-size: 50px; color: #20c997;"></i>
+            <h5 class="mt-3 mb-2" style="font-weight: 600;">Status Kelas Berhasil Diubah</h5>
+            <p style="color: #6c757d; margin-bottom: 25px;">
+              Kelas 4.80 - 6 sekarang berstatus <span id="finalStatus" style="font-weight: 600;">Online</span>
+            </p>
+            <button class="btn btn-primary" onclick="resetForm()">Kembali ke Beranda</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <a href="#" class="back-btn">
+    <i class="fas fa-chevron-left"></i>
+  </a>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../JS/UbahStatus.js"></script>
+</body>
+</html>
