@@ -1,6 +1,7 @@
 KelasKom adalah sebuah proyek website fullstack yang dikembangkan oleh 4 mahasiswa Fakultas Ilmu Komputer UNSIKA. Website ini dibuat untuk mengatasi permasalahan penjadwalan kelas yang sering menimbulkan kebingungan, terutama dalam hal penggunaan ruang kelas.
 
 Dengan KelasKom, pengguna dapat:
+
 • Melihat jadwal kelas (hari, jam, ruangan, dosen, dan mata kuliah).
 
 • Mengecek status ruang kelas:
